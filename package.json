@@ -1,0 +1,28 @@
+{
+  "name": "slightning-coco-data-utils-widget",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "license": "Apache-2.0",
+  "author": "SLIGHTNING",
+  "scripts": {
+    "start": "webpack serve --env mode=development --config webpack.config.js",
+    "watch": "webpack --watch --env mode=development --config webpack.config.js",
+    "build": "webpack --env mode=production --config webpack.config.js"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "@types/lodash": "^4.0.0",
+    "@ungap/structured-clone": "^1.0.0",
+    "babel-loader": "^9.0.0",
+    "fork-ts-checker-webpack-plugin": "^9.0.0",
+    "replace-string": "^4.0.0",
+    "slightning-coco-widget": "^2.4.4",
+    "slightning-coco-widget--webpack": "^2.3.0",
+    "ts-loader": "^9.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^5.0.0",
+    "webpack-merge": "^6.0.0"
+  }
+}
