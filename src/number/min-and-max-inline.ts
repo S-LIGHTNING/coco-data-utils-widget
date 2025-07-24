@@ -3,7 +3,7 @@ import { minAndMax, TypeType } from "./min-and-max"
 
 export const types: MethodTypes = {
     key: "number__minAndMaxInline",
-    label: "数字最小和最大",
+    label: "数字最小和最大单行",
     block: [
         {
             key: "type",

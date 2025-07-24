@@ -1,4 +1,8 @@
-export function and(firstBoolean: boolean, booleans: { boolean: boolean }[]): boolean {
+export function andV2(booleans: { boolean: boolean }[]): boolean {
+    return booleans.every(({ boolean }: { boolean: boolean }): boolean => boolean)
+}
+
+export function andV1(firstBoolean: boolean, booleans: { boolean: boolean }[]): boolean {
     if (!firstBoolean) {
         return false
     }

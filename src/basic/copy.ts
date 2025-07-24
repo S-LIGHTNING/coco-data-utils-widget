@@ -1,5 +1,6 @@
-import { AnyType, MethodTypes } from "slightning-coco-widget"
 import structuredClonePolyfill from "@ungap/structured-clone"
+
+import { AnyType, MethodTypes } from "slightning-coco-widget"
 
 export const types: MethodTypes = {
     key: "basic__copy",
@@ -16,6 +17,6 @@ export const types: MethodTypes = {
 
 export const methods: Record<string, Function> = {
     basic__copy(data: unknown): unknown {
-        return (window.structuredClone ?? structuredClonePolyfill)(data)
+        return (global.structuredClone ?? structuredClonePolyfill)(data)
     }
 }

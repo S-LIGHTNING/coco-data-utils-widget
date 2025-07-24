@@ -18,9 +18,11 @@ export const types: MethodTypes = {
                         key: "value",
                         label: "值",
                         type: new AnyType("值")
-                    }, ","
+                    }
                 ],
-                min: 0
+                separators: [","],
+                min: 0,
+                transformMax: 5
             })
         }
     ],

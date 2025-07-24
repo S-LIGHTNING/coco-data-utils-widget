@@ -1,4 +1,8 @@
-export function or(firstBoolean: boolean, booleans: { boolean: boolean }[]): boolean {
+export function orV2(booleans: { boolean: boolean }[]): boolean {
+    return booleans.some(({ boolean }: { boolean: boolean }): boolean => boolean)
+}
+
+export function orV1(firstBoolean: boolean, booleans: { boolean: boolean }[]): boolean {
     if (firstBoolean) {
         return true
     }

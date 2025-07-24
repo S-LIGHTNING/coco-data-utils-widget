@@ -1,9 +1,9 @@
 import { BooleanType, MethodTypes, MutatorType } from "slightning-coco-widget"
-import { and } from "./and"
+import { orV1 } from "./or"
 
 export const types: MethodTypes = {
-    key: "boolean__andMultiline",
-    label: "",
+    key: "boolean__orMultiline",
+    label: "v1",
     block: [
         {
             key: "firstBoolean",
@@ -16,7 +16,7 @@ export const types: MethodTypes = {
                 block: [
                     {
                         key: "boolean",
-                        label: "且",
+                        label: "或",
                         type: new BooleanType(true)
                     }
                 ],
@@ -26,11 +26,9 @@ export const types: MethodTypes = {
         }
     ],
     returns: new BooleanType(),
-    blockOptions: {
-        inline: false
-    }
+    blockOptions: { inline: false }
 }
 
 export const methods: Record<string, Function> = {
-    boolean__andMultiline: and
+    boolean__orMultiline: orV1
 }

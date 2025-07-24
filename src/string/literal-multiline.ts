@@ -8,7 +8,7 @@ export const types: MethodTypes = {
             key: "value",
             label: "值",
             type: new StringType({
-                defaultValue: "多行字符串",
+                defaultValue: "多行\n字符串",
                 inputType: StringInputType.MULTILINE
             })
         }

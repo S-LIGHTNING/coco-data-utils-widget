@@ -1,4 +1,5 @@
 const path = require("path")
+const fs = require("fs")
 const webpack = require("webpack")
 const { merge } = require("webpack-merge")
 const TerserPlugin = require("terser-webpack-plugin")
@@ -14,24 +15,57 @@ module.exports = function (env, __argv) {
      * @type {webpack.Configuration["mode"]}
      */
     const mode = env.mode
-    const comments = [
-        "==CoCoWidget==",
-        "@name " + "数据工具",
-        "@author " + package.author,
-        "@version " + package.version,
-        "@license " + package.license,
-        "==/CoCoWidget=="
-    ]
+    /** @type {string[][]} */
+    const commentsArray = []
+    /** @type {string[]} */
+    let comments = []
+    /** @type {Record<string, string>} */
+    const entry = {}
+    /**
+     * @param {string} dirPathname
+     * @returns {void}
+     */
+    function recursiveAddEntryFiles(dirPathname) {
+        for (const fileName of fs.readdirSync(path.resolve(__dirname, dirPathname))) {
+            const filePathname = path.resolve(__dirname, dirPathname, fileName)
+            if (fs.lstatSync(filePathname).isDirectory()) {
+                recursiveAddEntryFiles(filePathname)
+            } else if (/^index\.widget\.tsx?$/.test(fileName)) {
+                const fileContent = String(fs.readFileSync(filePathname))
+                const type = fileContent.match(/(?<=type: ").*(?=")/)?.[0]
+                const name = fileContent.match(/(?<=title: ").*(?=")/)?.[0]
+                if (type == null) {
+                    throw new Error(`解析 ${path.relative(__dirname, filePathname)} 的 type 失败`)
+                }
+                if (name == null) {
+                    throw new Error(`解析 ${path.relative(__dirname, filePathname)} 的 name 失败`)
+                }
+                commentsArray.push([
+                    "==CoCoWidget==",
+                    "@type " + type,
+                    "@name " + name,
+                    "@author " + package.author,
+                    "@version " + package.version,
+                    "@license " + package.license,
+                    "==/CoCoWidget=="
+                ])
+                entry[name] = filePathname
+            }
+        }
+    }
+    recursiveAddEntryFiles("./src")
+    for (const commentsInCommentsArray of commentsArray) {
+        comments.push(...commentsInCommentsArray)
+    }
+    comments = Array.from(new Set(comments))
     return merge(SCW.config, {
         mode,
         stats: "minimal",
-        entry: "./src/index.ts",
+        entry,
         output: {
             path: path.resolve(__dirname, "dist"),
-            filename: mode == "development" ? "数据工具.js" : `数据工具 v${package.version}.min.js`,
-            environment: {
-                arrowFunction: false
-            },
+            filename: mode == "development" ? "开发/[name].js" : `[name] v${package.version}.min.js`,
+            environment: { arrowFunction: false },
             iife: false
         },
         devServer: {
@@ -58,12 +92,12 @@ module.exports = function (env, __argv) {
         optimization: {
             minimizer: [
                 new TerserPlugin({
-                    include: /\.min\./,
+                    include: /\.min\.js/,
                     terserOptions: {
                         format: {
                             // @ts-ignore
                             comments: new Function(
-                                "node", "comment",
+                                "__node", "comment",
                                 `return ${JSON.stringify(comments)}.some(item => comment.value.includes(item))`
                             )
                         }
@@ -91,12 +125,12 @@ module.exports = function (env, __argv) {
                 }
             ]
         },
+        resolve: {
+            extensions: [".ts", ".tsx", ".js", ".jsx"]
+        },
         externalsType: "commonjs",
         externals: {
             lodash: "lodash"
-        },
-        resolve: {
-            extensions: [".ts", ".tsx", ".js", ".jsx"]
         },
         plugins: [
             new ForkTsCheckerWebpackPlugin(),
@@ -104,11 +138,14 @@ module.exports = function (env, __argv) {
             new webpack.IgnorePlugin({
                 resourceRegExp: /webpack-dev-server/,
             }),
-            new webpack.BannerPlugin({
-                banner: comments.map(line => `// ${line}\n`).join(""),
-                raw: true,
-                entryOnly: true
-            })
+            ...commentsArray.map((comments) =>
+                new webpack.BannerPlugin({
+                    test: new RegExp("(^|/)" + comments.find(comment => comment.includes("@name"))?.split(" ")[1]),
+                    banner: comments.map(line => `// ${line}\n`).join(""),
+                    raw: true,
+                    entryOnly: true
+                })
+            )
         ]
     })
 }

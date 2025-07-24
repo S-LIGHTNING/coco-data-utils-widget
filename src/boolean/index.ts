@@ -1,18 +1,26 @@
 import { Color, MethodGroup } from "slightning-coco-widget"
 
-import * as AndInline from "./and-inline"
-import * as AndMultiline from "./and-multiline"
-import * as OrInline from "./or-inline"
-import * as OrMultiline from "./or-multiline"
+import * as AndInlineV2 from "./and-inline-v2"
+import * as AndInlineV1 from "./and-inline-v1"
+import * as AndMultilineV2 from "./and-multiline-v2"
+import * as AndMultilineV1 from "./and-multiline-v1"
+import * as OrInlineV2 from "./or-inline-v2"
+import * as OrInlineV1 from "./or-inline-v1"
+import * as OrMultilineV2 from "./or-multiline-v2"
+import * as OrMultilineV1 from "./or-multiline-v1"
 
 export const types: MethodGroup = {
     label: "布尔",
     blockOptions: { color: Color.BROWN },
     contents: [
-        { contents: [AndInline.types, AndMultiline.types, OrInline.types, OrMultiline.types] }
+        { contents: [
+            AndInlineV1.types, AndInlineV2.types, AndMultilineV2.types, AndMultilineV1.types,
+            OrInlineV2.types, OrInlineV1.types, OrMultilineV2.types, OrMultilineV1.types
+        ]}
     ]
 }
 
 export const methods: Record<string, Function> = Object.assign({},
-    AndInline.methods, AndMultiline.methods, OrInline.methods, OrMultiline.methods
+    AndInlineV1.methods, AndInlineV2.methods, AndMultilineV2.methods, AndMultilineV1.methods,
+    OrInlineV2.methods, OrInlineV1.methods, OrMultilineV2.methods, OrMultilineV1.methods
 )
