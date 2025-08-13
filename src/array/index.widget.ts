@@ -8,8 +8,9 @@ const types: Types = {
     info: {
         title: "列表工具",
         icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_4sf_5p-l3_1749192384667.svg",
-        category: "数据",
+        category: "工具",
         version: packageInfo.version,
+        author: packageInfo.author,
         url: {
             homepage: "https://gitee.com/slightning/coco-data-utils-widget",
             docs: "https://gitee.com/slightning/coco-data-utils-widget",

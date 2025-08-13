@@ -1,6 +1,6 @@
 {
   "name": "slightning-coco-data-utils-widget",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "编程猫 CoCo 数据工具控件",
   "license": "Apache-2.0",
@@ -17,7 +17,7 @@
     "babel-loader": "^9.0.0",
     "fork-ts-checker-webpack-plugin": "^9.0.0",
     "replace-string": "^4.0.0",
-    "slightning-coco-widget": "^2.6.0",
+    "slightning-coco-widget": "^2.8.0",
     "slightning-coco-widget--webpack": "^2.3.0",
     "ts-loader": "^9.0.0",
     "webpack": "^5.0.0",
