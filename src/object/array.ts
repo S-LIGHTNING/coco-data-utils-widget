@@ -1,4 +1,4 @@
-import { AnyType, ArrayType, MethodTypes, ObjectType, StringEnumType } from "slightning-coco-widget"
+import { ArrayType, MethodTypes, ObjectType, StringEnumType } from "slightning-coco-widget"
 
 export type ObjectArrayType = "Keys" | "Values" | "Entries"
 
@@ -26,7 +26,7 @@ export const types: MethodTypes = {
             ])
         }, "列表"
     ],
-    returns: new ArrayType({ itemType: new AnyType() })
+    returns: new ArrayType()
 }
 
 export const methods: Record<string, Function> = {

@@ -12,9 +12,9 @@ const package = require("./package.json")
  */
 module.exports = function (env, __argv) {
     /**
-     * @type {webpack.Configuration["mode"]}
+     * @type {NonNullable<webpack.Configuration["mode"]>}
      */
-    const mode = env.mode
+    const mode = env.mode ?? "none"
     /** @type {string[][]} */
     const commentsArray = []
     /** @type {string[]} */
@@ -64,7 +64,11 @@ module.exports = function (env, __argv) {
         entry,
         output: {
             path: path.resolve(__dirname, "dist"),
-            filename: mode == "development" ? "开发/[name].js" : `[name] v${package.version}.min.js`,
+            filename: {
+                development: "开发/[name].js",
+                production: `[name] v${package.version}.min.js`,
+                none: `[name] v${package.version}.js`
+            }[mode],
             environment: { arrowFunction: false },
             iife: false
         },
@@ -109,11 +113,11 @@ module.exports = function (env, __argv) {
         devtool: mode == "development" ? "eval-source-map" : false,
         module: {
             rules: [
-                ...(mode == "development" ? [] : [{
+                ...(mode == "production" ? [{
                     test: /\.(t|j)sx?$/,
                     exclude: /node_modules/,
                     use: "babel-loader"
-                }]), {
+                }] : []), {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
                     use: {

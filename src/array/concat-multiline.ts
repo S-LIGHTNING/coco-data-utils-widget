@@ -1,4 +1,4 @@
-import { AnyType, ArrayType, MethodBlockParam, MethodTypes, MutatorType } from "slightning-coco-widget"
+import { ArrayType, MethodBlockParam, MethodTypes, MutatorType } from "slightning-coco-widget"
 import { concat } from "./concat"
 
 export const types: MethodTypes = {
@@ -14,7 +14,6 @@ export const types: MethodTypes = {
                         key: "array",
                         label: "列表",
                         type: new ArrayType({
-                            itemType: new AnyType(),
                             defaultValue: ["列表"]
                         })
                     }

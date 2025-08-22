@@ -13,6 +13,7 @@ import * as Some from "./some"
 import * as Every from "./every"
 
 import * as Sort from "./sort"
+import * as SortByV1 from "./sort-by-v1"
 import * as SortWith from "./sort-with"
 
 import * as Slice from "./slice"
@@ -32,7 +33,7 @@ export const types: MethodGroup = {
         { contents: [Item.types, Find.types] },
         { contents: [IndexOf.types, FindIndex.types] },
         { contents: [Some.types, Every.types] },
-        { contents: [Sort.types, SortWith.types] },
+        { contents: [Sort.types, SortByV1.types, SortWith.types] },
         { contents: [Slice.types, Flatten.types, ConcatInline.types, ConcatMultiline.types, Map.types, Filter.types] },
         { contents: [Join.types] }
     ]
@@ -43,7 +44,7 @@ export const methods: Record<string, Function> = Object.assign({},
     Item.methods, Find.methods,
     IndexOf.methods, FindIndex.methods,
     Some.methods, Every.methods,
-    Sort.methods, SortWith.methods,
+    Sort.methods, SortByV1.methods, SortWith.methods,
     Slice.methods, Flatten.methods, ConcatInline.methods, ConcatMultiline.methods, Map.methods, Filter.methods,
     Join.methods
 )

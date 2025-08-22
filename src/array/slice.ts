@@ -1,4 +1,4 @@
-import { AnyType, ArrayType, IntegerType, MethodTypes } from "slightning-coco-widget"
+import { ArrayType, IntegerType, MethodTypes } from "slightning-coco-widget"
 import { IndexType, processIndex } from "../index-tools"
 
 export const types: MethodTypes = {
@@ -9,7 +9,6 @@ export const types: MethodTypes = {
             key: "array",
             label: "列表",
             type: new ArrayType({
-                itemType: new AnyType(),
                 defaultValue: ["列表"]
             })
         }, {

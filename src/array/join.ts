@@ -1,4 +1,4 @@
-import { AnyType, ArrayType, MethodTypes, StringType } from "slightning-coco-widget"
+import { ArrayType, MethodTypes, StringType } from "slightning-coco-widget"
 
 export const types: MethodTypes = {
     key: "array__join",
@@ -12,7 +12,6 @@ export const types: MethodTypes = {
             key: "array",
             label: "列表",
             type: new ArrayType({
-                itemType: new AnyType(),
                 defaultValue: ["列表"]
             })
         }

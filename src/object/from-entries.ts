@@ -1,4 +1,4 @@
-import { AnyType, ArrayType, MethodTypes, ObjectType } from "slightning-coco-widget"
+import { ArrayType, MethodTypes, ObjectType } from "slightning-coco-widget"
 
 export const types: MethodTypes = {
     key: "object__fromEntries",
@@ -8,9 +8,7 @@ export const types: MethodTypes = {
             key: "entries",
             label: "键值对",
             type: new ArrayType({
-                itemType: new ArrayType({
-                    itemType: new AnyType()
-                }),
+                itemType: new ArrayType(),
                 defaultValue: [
                     ["键1", "值1"],
                     ["键2", "值2"]

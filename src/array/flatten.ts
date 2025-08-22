@@ -1,6 +1,6 @@
 import _ from "lodash"
 
-import { AnyType, ArrayType, MethodTypes } from "slightning-coco-widget"
+import { ArrayType, MethodTypes } from "slightning-coco-widget"
 
 export const types: MethodTypes = {
     key: "array__flatten",
@@ -10,7 +10,6 @@ export const types: MethodTypes = {
             key: "array",
             label: "列表",
             type: new ArrayType({
-                itemType: new AnyType(),
                 defaultValue: ["列表"]
             })
         }

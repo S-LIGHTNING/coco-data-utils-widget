@@ -9,7 +9,6 @@ export const types: MethodTypes = {
             key: "array",
             label: "列表",
             type: new ArrayType({
-                itemType: new AnyType(),
                 defaultValue: ["列表"]
             })
         }, {

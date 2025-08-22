@@ -3,26 +3,26 @@ import structuredClonePolyfill from "@ungap/structured-clone"
 const structuredClone: typeof global.structuredClone = global.structuredClone ?? structuredClonePolyfill
 
 export function deepMerge(data: { value: unknown }[]): unknown {
-    let result: unknown = null
-    for (const { value } of data) {
-        if (Array.isArray(result) && Array.isArray(value)) {
-            result = result.concat((value))
+    let target: unknown = null
+    for (const { value: source } of data) {
+        if (Array.isArray(target) && Array.isArray(source)) {
+            target = target.concat((source))
         } else if (
-            result != null && typeof result == "object" &&
-            value != null && typeof value == "object"
+            target != null && typeof target == "object" &&
+            source != null && typeof source == "object"
         ) {
-            for (const [key, valueValue] of Object.entries(value)) {
-                if (key in result && typeof (result as any)[key] == "object") {
-                    (result as any)[key] = deepMerge([
-                        { value: (result as any)[key] }, { value: valueValue }
+            for (const [key, value] of Object.entries(source)) {
+                if (key in target && typeof (target as any)[key] == "object") {
+                    (target as any)[key] = deepMerge([
+                        { value: (target as any)[key] }, { value: value }
                     ])
                 } else {
-                    (result as any)[key] = valueValue
+                    (target as any)[key] = structuredClone(value)
                 }
             }
         } else {
-            result = structuredClone(value)
+            target = structuredClone(source)
         }
     }
-    return result
+    return target
 }
