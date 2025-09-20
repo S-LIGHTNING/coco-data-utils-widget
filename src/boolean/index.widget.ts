@@ -2,7 +2,7 @@ import { addCheck, addThisForMethods, exportWidget, getSuperWidget, transformMut
 import packageInfo from "../../package.json"
 
 import * as Index from "./index"
-import { extractOldVersionMethods } from "../extract-old-version-methods"
+import { extractOldVersionMethods } from "../utils/extract-old-version-methods"
 
 const types: Types = {
     type: "SLIGHTNING_BOOLEAN_UTILS_WIDGET",

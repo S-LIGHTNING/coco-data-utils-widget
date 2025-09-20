@@ -5,9 +5,13 @@ const { merge } = require("webpack-merge")
 const TerserPlugin = require("terser-webpack-plugin")
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 const SCW = require("slightning-coco-widget--webpack")
-const package = require("./package.json")
+const VisualizerPlugin2 = require("webpack-visualizer-plugin2")
+
+const packageInfo = require("./package.json")
 
 /**
+ * @param env {{ mode?: webpack.Configuration["mode"], platform?: string }}
+ * @param __argv {any}
  * @returns {webpack.Configuration}
  */
 module.exports = function (env, __argv) {
@@ -15,6 +19,7 @@ module.exports = function (env, __argv) {
      * @type {NonNullable<webpack.Configuration["mode"]>}
      */
     const mode = env.mode ?? "none"
+    const platform = env.platform
     /** @type {string[][]} */
     const commentsArray = []
     /** @type {string[]} */
@@ -44,12 +49,15 @@ module.exports = function (env, __argv) {
                     "==CoCoWidget==",
                     "@type " + type,
                     "@name " + name,
-                    "@author " + package.author,
-                    "@version " + package.version,
-                    "@license " + package.license,
+                    "@author " + packageInfo.author,
+                    "@version " + packageInfo.version,
+                    "@license " + packageInfo.license,
                     "==/CoCoWidget=="
                 ])
-                entry[name] = filePathname
+                entry[`${name} v${packageInfo.version}${platform == null ? "" : "." + platform.toLowerCase()}.js`] = filePathname
+                if (mode == "production") {
+                    entry[`${name} v${packageInfo.version}${platform == null ? "" : "." + platform.toLowerCase()}.min.js`] = filePathname
+                }
             }
         }
     }
@@ -66,8 +74,8 @@ module.exports = function (env, __argv) {
             path: path.resolve(__dirname, "dist"),
             filename: {
                 development: "开发/[name].js",
-                production: `[name] v${package.version}.min.js`,
-                none: `[name] v${package.version}.js`
+                production: `[name]`,
+                none: `[name] v${packageInfo.version}.js`
             }[mode],
             environment: { arrowFunction: false },
             iife: false
@@ -96,7 +104,7 @@ module.exports = function (env, __argv) {
         optimization: {
             minimizer: [
                 new TerserPlugin({
-                    include: /\.min\.js/,
+                    include: /\.min\.js$/,
                     terserOptions: {
                         format: {
                             // @ts-ignore
@@ -104,6 +112,25 @@ module.exports = function (env, __argv) {
                                 "__node", "comment",
                                 `return ${JSON.stringify(comments)}.some(item => comment.value.includes(item))`
                             )
+                        }
+                    },
+                    extractComments: false
+                }),
+                new TerserPlugin({
+                    exclude: /\.min\.js$/,
+                    terserOptions: {
+                        mangle: false,
+                        keep_classnames: true,
+                        keep_fnames: true,
+                        compress: {
+                            defaults: false,
+                            unused: true,
+                            dead_code: true
+                        },
+                        format: {
+                            comments: true,
+                            beautify: true,
+                            indent_level: 2
                         }
                     },
                     extractComments: false
@@ -118,6 +145,14 @@ module.exports = function (env, __argv) {
                     exclude: /node_modules/,
                     use: "babel-loader"
                 }] : []), {
+                    test: /\.(j|t)sx?$/,
+                    use: {
+                        loader: SCW.Loaders.ExternalImportLoader,
+                        options: {
+                            "@slightning/anything-to-string": "https://unpkg.com/@slightning/anything-to-string@1/dist/cjs/bundle.min.js"
+                        }
+                    }
+                }, {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
                     use: {
@@ -134,6 +169,7 @@ module.exports = function (env, __argv) {
         },
         externalsType: "commonjs",
         externals: {
+            "@slightning/anything-to-string": "@slightning/anything-to-string",
             lodash: "lodash"
         },
         plugins: [
@@ -149,7 +185,10 @@ module.exports = function (env, __argv) {
                     raw: true,
                     entryOnly: true
                 })
-            )
+            ),
+            new VisualizerPlugin2({
+                filename: "./stats.html"
+            })
         ]
     })
 }

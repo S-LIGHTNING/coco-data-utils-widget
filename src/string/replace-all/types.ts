@@ -1,0 +1,22 @@
+import { MethodTypes, StringType } from "slightning-coco-widget"
+
+export const types: MethodTypes = {
+    key: "string__replaceAll",
+    label: "字符串替换全部",
+    block: [
+        "替换", {
+            key: "string",
+            label: "字符串",
+            type: new StringType("字符串")
+        }, "中的所有", {
+            key: "search",
+            label: "查找值",
+            type: new StringType("字符")
+        }, "为", {
+            key: "replace",
+            label: "替换值",
+            type: new StringType("字")
+        }
+    ],
+    returns: new StringType()
+}
