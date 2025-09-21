@@ -115,25 +115,6 @@ module.exports = function (env, __argv) {
                         }
                     },
                     extractComments: false
-                }),
-                new TerserPlugin({
-                    exclude: /\.min\.js$/,
-                    terserOptions: {
-                        mangle: false,
-                        keep_classnames: true,
-                        keep_fnames: true,
-                        compress: {
-                            defaults: false,
-                            unused: true,
-                            dead_code: true
-                        },
-                        format: {
-                            comments: true,
-                            beautify: true,
-                            indent_level: 2
-                        }
-                    },
-                    extractComments: false
                 })
             ]
         },
@@ -149,7 +130,7 @@ module.exports = function (env, __argv) {
                     use: {
                         loader: SCW.Loaders.ExternalImportLoader,
                         options: {
-                            "@slightning/anything-to-string": "https://unpkg.com/@slightning/anything-to-string@1/dist/cjs/bundle.min.js"
+                            "@slightning/anything-to-string": "https://static.codemao.cn/pickduck/ryldSkpogg.js?hash=FnaGREYTgQFy9ZLnqsx0jkDePbb-"
                         }
                     }
                 }, {
