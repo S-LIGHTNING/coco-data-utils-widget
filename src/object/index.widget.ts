@@ -1,8 +1,9 @@
 import { addCheck, addThisForMethods, exportWidget, getSuperWidget, transformMutator, Types } from "slightning-coco-widget"
+
+import { extractOldVersionMethods } from "../utils/extract-old-version-methods"
 import packageInfo from "../../package.json"
 
 import * as Index from "./index"
-import { extractOldVersionMethods } from "../utils/extract-old-version-methods"
 
 const types: Types = {
     type: "SLIGHTNING_OBJECT_UTILS_WIDGET",

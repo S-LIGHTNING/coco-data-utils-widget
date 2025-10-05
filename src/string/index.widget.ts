@@ -1,4 +1,5 @@
 import { addCheck, addThisForMethods, exportWidget, getSuperWidget, Types } from "slightning-coco-widget"
+
 import packageInfo from "../../package.json"
 
 import * as Index from "./index"

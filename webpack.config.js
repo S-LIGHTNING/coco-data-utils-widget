@@ -3,7 +3,6 @@ const fs = require("fs")
 const webpack = require("webpack")
 const { merge } = require("webpack-merge")
 const TerserPlugin = require("terser-webpack-plugin")
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 const SCW = require("slightning-coco-widget--webpack")
 const VisualizerPlugin2 = require("webpack-visualizer-plugin2")
 
@@ -74,8 +73,8 @@ module.exports = function (env, __argv) {
             path: path.resolve(__dirname, "dist"),
             filename: {
                 development: "开发/[name].js",
-                production: `[name]`,
-                none: `[name] v${packageInfo.version}.js`
+                production: `v${packageInfo.version}/[name]`,
+                none: `v${packageInfo.version}/[name]`
             }[mode],
             environment: { arrowFunction: false },
             iife: false
@@ -154,7 +153,6 @@ module.exports = function (env, __argv) {
             lodash: "lodash"
         },
         plugins: [
-            new ForkTsCheckerWebpackPlugin(),
             new webpack.ProgressPlugin(),
             new webpack.IgnorePlugin({
                 resourceRegExp: /webpack-dev-server/,
@@ -168,7 +166,7 @@ module.exports = function (env, __argv) {
                 })
             ),
             new VisualizerPlugin2({
-                filename: `./stats${platform == null ? "" : "." + platform.toLowerCase()}.html`
+                filename: `./v${packageInfo.version}/stats${platform == null ? "" : "." + platform.toLowerCase()}.html`
             })
         ]
     })

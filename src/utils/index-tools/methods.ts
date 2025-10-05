@@ -1,11 +1,4 @@
-import { StringEnumType } from "slightning-coco-widget"
-
-export type IndexType = "FromFirst" | "FromLast"
-
-export const IndexType = new StringEnumType([
-    ["正数", "FromFirst"],
-    ["倒数", "FromLast"]
-])
+import { IndexType } from "./types"
 
 export function processIndex(index: number, indexType: IndexType, length: number): number {
     switch (indexType) {

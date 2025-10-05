@@ -1,6 +1,6 @@
 {
   "name": "slightning-coco-data-utils-widget",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "编程猫 CoCo 数据工具控件",
   "license": "Apache-2.0",
@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack serve --env mode=development --config webpack.config.js",
     "watch": "webpack --watch --env mode=development --config webpack.config.js",
-    "build": "npm run build:coco && npm run build:creationproject1 && npm run build:creationproject2",
+    "build": "tsc --noEmit && npm run build:coco && npm run build:creationproject1 && npm run build:creationproject2",
     "build:coco": "scw-build coco --env platform=coco --env mode=production --config webpack.config.js",
     "build:creationproject1": "scw-build creationproject1 --env platform=creation-project-1 --env mode=production --config webpack.config.js",
     "build:creationproject2": "scw-build creationproject2 --env platform=creation-project-2 --env mode=production --config webpack.config.js"
@@ -19,9 +19,8 @@
     "@types/lodash": "^4.0.0",
     "@ungap/structured-clone": "^1.0.0",
     "babel-loader": "^9.0.0",
-    "fork-ts-checker-webpack-plugin": "^9.0.0",
     "replace-string": "^4.0.0",
-    "slightning-coco-widget": "^2.10.0",
+    "slightning-coco-widget": "^2.10.1",
     "slightning-coco-widget--webpack": "^2.5.1",
     "ts-loader": "^9.0.0",
     "webpack": "^5.0.0",

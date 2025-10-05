@@ -10,9 +10,7 @@ export const types: MethodTypes = {
             label: "字典",
             type: new ObjectType({
                 defaultValue: {
-                    "字典": {
-                        "路径": "值"
-                    }
+                    "路径": ["值1", "值2"]
                 }
             })
         }, ...PathBlockTypes, "的值"
