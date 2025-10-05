@@ -7,7 +7,8 @@ const types: Types = {
     type: "SLIGHTNING_STRING_UTILS_WIDGET",
     info: {
         title: "字符串工具",
-        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_4sf_5p-l3_1749192384667.svg",
+        instanceTitle: "_",
+        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_-lXro9yb4n_1759627469110.svg",
         category: "工具",
         version: packageInfo.version,
         author: packageInfo.author,

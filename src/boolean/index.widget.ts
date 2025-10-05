@@ -8,7 +8,8 @@ const types: Types = {
     type: "SLIGHTNING_BOOLEAN_UTILS_WIDGET",
     info: {
         title: "布尔工具",
-        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_4sf_5p-l3_1749192384667.svg",
+        instanceTitle: "_",
+        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_Cgpzc8AKjw_1759627469115.svg",
         category: "工具",
         version: packageInfo.version,
         author: packageInfo.author,

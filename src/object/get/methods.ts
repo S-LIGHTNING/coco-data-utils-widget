@@ -1,18 +1,50 @@
+import { propertyIsEnumerable } from "../../utils/property-is-enumerable"
 import { Path, processPath } from "../path"
 
-export const methods: Record<string, Function> = {
-    object__get(object: Record<string, unknown>, path: Path): unknown {
-        const keys: string[] = processPath(path)
-        let current: unknown = object
-        for (const key of keys) {
-            if (current == null || typeof current != "object") {
-                throw new Error("路径不存在")
-            }
-            current = (current as Record<string, unknown>)[key]
-            if (current == undefined) {
-                throw new Error("路径不存在")
-            }
+export function getPath(object: Record<string, unknown>, path: Path): unknown {
+    const keys = processPath(path)
+    const accessedKey: (string | number)[] = []
+    let current: unknown = object
+    for (const key of keys) {
+        if (current == null || typeof current != "object") {
+            throw new Error(`${accessedKey.length == 0 ? "根" : accessedKey.join("·")} 不是字典`)
         }
-        return current
+        if (!propertyIsEnumerable(current, key)) {
+            throw new Error(`${accessedKey.length == 0 ? "根字典" : accessedKey.join("·")} 上不存在键 ${key}`)
+        }
+        current = get(current, key)
+        accessedKey.push(key)
     }
+    return current
+}
+
+export function getPathObject(object: Record<string, unknown>, path: Path): [Record<string, unknown>, string | number] {
+    const keys = processPath(path)
+    const lastKey = keys.pop()!
+    const resultObject = getPath(object, keys)
+    if (resultObject == null || typeof resultObject != "object") {
+        throw new Error(`${keys.length == 0 ? "根" : keys.join("·")} 不是字典`)
+    }
+    if (!propertyIsEnumerable(resultObject, lastKey)) {
+        throw new Error(`${keys.length == 0 ? "根字典" : keys.join("·")} 上不存在键 ${lastKey}`)
+    }
+    return [resultObject as Record<string, unknown>, lastKey]
+}
+
+export function get(object: Record<string, unknown>, key: string | number): unknown {
+    return object[processKey(object, key)]
+}
+
+export function processKey(object: Record<string, unknown>, key: string | number): string | number {
+    if (Array.isArray(object)) {
+        let index = typeof key == "number" ? key : Number(key)
+        if (Number.isInteger(index) && 1 <= index && index <= object.length) {
+            return index - 1
+        }
+    }
+    return key
+}
+
+export const methods: Record<string, Function> = {
+    object__get: getPath
 }

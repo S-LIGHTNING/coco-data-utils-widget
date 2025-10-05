@@ -8,6 +8,7 @@ const types: Types = {
     type: "SLIGHTNING_DATA_UTILS_WIDGET",
     info: {
         title: "数据工具",
+        instanceTitle: "_",
         icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_4sf_5p-l3_1749192384667.svg",
         category: "工具",
         version: packageInfo.version,

@@ -1,11 +1,11 @@
-import { ArrayType, MethodBlock, StringType, UnionType } from "slightning-coco-widget"
+import { ArrayType, MethodBlock, NumberType, StringType, UnionType } from "slightning-coco-widget"
 
-export type Path = string | string[]
+export type Path = string | (string | number)[]
 
 export const PathType = new UnionType<Path>(
     new StringType("字典.路径"),
     new ArrayType({
-        itemType: new StringType()
+        itemType: new UnionType<string | number>(new StringType(), new NumberType())
     }
 ))
 

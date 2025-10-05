@@ -2,9 +2,9 @@ import { AnyType, MethodTypes, MutatorType, ObjectType } from "slightning-coco-w
 
 export const types: MethodTypes = {
     key: "object__literalInline",
-    label: "字典字面单行",
+    label: "字典字面单行 v1",
     block: [
-        "字典", {
+        "v1", "字典", {
             key: "entries",
             label: "项",
             type: new MutatorType({

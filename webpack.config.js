@@ -168,7 +168,7 @@ module.exports = function (env, __argv) {
                 })
             ),
             new VisualizerPlugin2({
-                filename: "./stats.html"
+                filename: `./stats${platform == null ? "" : "." + platform.toLowerCase()}.html`
             })
         ]
     })

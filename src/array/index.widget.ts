@@ -7,7 +7,8 @@ const types: Types = {
     type: "SLIGHTNING_ARRAY_UTILS_WIDGET",
     info: {
         title: "列表工具",
-        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_4sf_5p-l3_1749192384667.svg",
+        instanceTitle: "_",
+        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_DpauLk-OEr_1759627469117.svg",
         category: "工具",
         version: packageInfo.version,
         author: packageInfo.author,

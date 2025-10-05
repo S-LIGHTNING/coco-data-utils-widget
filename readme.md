@@ -33,7 +33,23 @@
 
 ## 四、开发
 
-### 1.积木规范
+### 1.图标规范
+
+#### (1) 基础
+
+控件图标遵循 Creation Project 1.0 控件图标规范，如下图所示（来自早期 Creation Project 文档）：
+
+![Creation Project 1.0 图标规范.png](https://static.codemao.cn/pickduck/HyxngL5C2el.png?hash=FqCLb0EGfV_tH2OTr3ipPh4ammHO)
+
+#### (2) 数据工具控件图标
+
+数据工具图标由一条横线、一条竖线、一条斜率为 1 的线和一条斜率为 -1 的线组成，四条线等长等宽，两端为圆形，相交于一点，交点为这四条线的中点。
+
+#### (3) 部分控件图标
+
+在分控件图标中需要包含数据工具控件图标，且数据工具控件图标的宽高为 312。
+
+### 2.积木规范
 
 若遵守该规范会产生兼容性问题，优先考虑兼容性。
 
@@ -66,6 +82,6 @@
 
 每个部分的积木，常用的排在上面，不常用的排在下面。
 
-### 2.技术信息
+### 3.技术信息
 
 本控件使用 [SCW](https://s-lightning.github.io/slightning-coco-widget/) 框架开发，使用代码测试 控件进行测试，使用 [控件实时重载](https://s-lightning.github.io/slightning-coco-widget/docs/tutorial/guides/packaging-optimization#%E9%85%8D%E7%BD%AE%E6%8E%A7%E4%BB%B6%E5%AE%9E%E6%97%B6%E9%87%8D%E8%BD%BD) 控件实现开发环境下的 Live Reload。

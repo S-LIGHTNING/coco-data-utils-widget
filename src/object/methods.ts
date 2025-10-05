@@ -1,4 +1,4 @@
-import * as LiteralInline from "./literal-inline"
+import * as LiteralInline from "./literal-inline-v1"
 import * as LiteralMultiline from "./literal-multiline"
 import * as FromEntries from "./from-entries"
 

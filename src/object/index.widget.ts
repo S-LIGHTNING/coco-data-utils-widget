@@ -2,12 +2,14 @@ import { addCheck, addThisForMethods, exportWidget, getSuperWidget, transformMut
 import packageInfo from "../../package.json"
 
 import * as Index from "./index"
+import { extractOldVersionMethods } from "../utils/extract-old-version-methods"
 
 const types: Types = {
     type: "SLIGHTNING_OBJECT_UTILS_WIDGET",
     info: {
         title: "字典工具",
-        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_4sf_5p-l3_1749192384667.svg",
+        instanceTitle: "_",
+        icon: "https://creation.bcmcdn.com/716/appcraft/IMAGE_S6yNEHkv2_1759627469107.svg",
         category: "工具",
         version: packageInfo.version,
         author: packageInfo.author,
@@ -30,6 +32,7 @@ Object.assign(ObjectUtilsWidget.prototype, Index.methods)
 
 exportWidget(types, ObjectUtilsWidget, {
     decorators: [
+        extractOldVersionMethods,
         addCheck,
         { "CoCo|CreationProject":  [
             transformMutator,

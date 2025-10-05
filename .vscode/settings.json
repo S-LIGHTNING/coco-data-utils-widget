@@ -2,10 +2,19 @@
     "cSpell.words": [
         "cocotais",
         "codemao",
+        "creationproject",
         "fnames",
         "gitee",
         "slightning",
         "ungap",
         "unminified"
-    ]
+    ],
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.coco.js": "${capture}.creation-project-1.js, ${capture}.creation-project-2.js",
+        "*.coco.html": "${capture}.creation-project-1.html, ${capture}.creation-project-2.html",
+        "index.widget.*": "index.${capture}, types.${capture}, methods.${capture}",
+        "webpack.config.*": "babel.*, tsconfig.*",
+        "package.json": "package-lock.json"
+    }
 }
